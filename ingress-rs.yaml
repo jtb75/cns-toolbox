@@ -1,0 +1,89 @@
+APIVersion: 0
+data:
+  networkrulesetpolicies:
+
+    - incomingRules:
+        - action: Allow
+          logsDisabled: false
+          object:
+            - - 'externalnetwork:name=public'
+          observationEnabled: false
+          protocolPorts:
+            - any
+      name: ingress-backend-rs
+      propagate: true
+      subject:
+        - - '@org:cloudaccount=jtb75-002'
+          - '@org:group=demo-eks-dWeJ'
+          - '@org:kubernetes=ingress'
+          - '@org:tenant=806079892264890368'
+          - app=default-backend
+
+    - incomingRules:
+        - action: Allow
+          logsDisabled: false
+          object:
+            - - '@org:cloudaccount=jtb75-002'
+              - '@org:group=demo-eks-dWeJ'
+              - '@org:kubernetes=ingress'
+              - '@org:tenant=806079892264890368'
+          observationEnabled: false
+          protocolPorts:
+            - any
+      name: ingress-intra-rs
+      outgoingRules:
+        - action: Allow
+          logsDisabled: false
+          object:
+            - - '@org:cloudaccount=jtb75-002'
+              - '@org:group=demo-eks-dWeJ'
+              - '@org:kubernetes=ingress'
+              - '@org:tenant=806079892264890368'
+          observationEnabled: false
+          protocolPorts:
+            - any
+      propagate: true
+      subject:
+        - - '@org:cloudaccount=jtb75-002'
+          - '@org:group=demo-eks-dWeJ'
+          - '@org:kubernetes=ingress'
+          - '@org:tenant=806079892264890368'
+
+    - incomingRules:
+        - action: Allow
+          logsDisabled: false
+          object:
+            - - 'externalnetwork:name=public'
+          observationEnabled: false
+          protocolPorts:
+            - any
+      name: ingress-lb-rs
+      outgoingRules:
+        - action: Allow
+          logsDisabled: false
+          object:
+            - - 'externalnetwork:name=public'
+          observationEnabled: false
+          protocolPorts:
+            - any
+        - action: Allow
+          logsDisabled: false
+          object:
+            - - '@org:cloudaccount=jtb75-002'
+              - '@org:group=demo-eks-dWeJ'
+              - '@org:kubernetes=voting'
+              - '@org:tenant=806079892264890368'
+              - app=azure-vote-front
+          observationEnabled: false
+          protocolPorts:
+            - any
+      propagate: true
+      subject:
+        - - '@org:cloudaccount=jtb75-002'
+          - '@org:group=demo-eks-dWeJ'
+          - '@org:kubernetes=ingress'
+          - '@org:tenant=806079892264890368'
+
+identities:
+  - networkrulesetpolicy
+label: Snapperripple Snout
