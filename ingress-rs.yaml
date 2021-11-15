@@ -2,7 +2,9 @@ APIVersion: 0
 data:
   networkrulesetpolicies:
 
-    - incomingRules:
+    - name: ingress-backend-rs
+      propagate: true
+      incomingRules:
         - action: Allow
           logsDisabled: false
           object:
@@ -10,8 +12,6 @@ data:
           observationEnabled: false
           protocolPorts:
             - any
-      name: ingress-backend-rs
-      propagate: true
       subject:
         - - '@org:cloudaccount=jtb75-002'
           - '@org:group=demo-eks-dWeJ'
@@ -19,7 +19,8 @@ data:
           - '@org:tenant=806079892264890368'
           - app=default-backend
 
-    - incomingRules:
+    - name: ingress-intra-rs
+      incomingRules:
         - action: Allow
           logsDisabled: false
           object:
@@ -30,7 +31,6 @@ data:
           observationEnabled: false
           protocolPorts:
             - any
-      name: ingress-intra-rs
       outgoingRules:
         - action: Allow
           logsDisabled: false
@@ -49,7 +49,8 @@ data:
           - '@org:kubernetes=ingress'
           - '@org:tenant=806079892264890368'
 
-    - incomingRules:
+    - name: ingress-lb-rs
+      incomingRules:
         - action: Allow
           logsDisabled: false
           object:
@@ -57,7 +58,6 @@ data:
           observationEnabled: false
           protocolPorts:
             - any
-      name: ingress-lb-rs
       outgoingRules:
         - action: Allow
           logsDisabled: false
