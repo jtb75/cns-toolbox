@@ -66,4 +66,4 @@ then
 	exit
 fi
 
-echo ${APOCTL} enforcer install linux --auth-mode appcred -A ${API} -n ${NAMESPACE} -t ${MTOKEN} --confirm
+${APOCTL} enforcer install linux --auth-mode appcred -A ${API} -n ${NAMESPACE} -t ${MTOKEN} --confirm
